@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-person-form',
@@ -29,6 +30,7 @@ import { CommonModule } from '@angular/common';
     MatDividerModule,
     MatIconModule,
     SkillFormComponent,
+    MatCardModule
   ],
   standalone: true,
 })
@@ -37,11 +39,15 @@ export class PersonFormComponent {
 
   constructor(private fb: FormBuilder) {}
 
-  get skills() {
-    return this.skillFormArray.controls as FormGroup[];
+  ngOnInit(): void {
+    this.addSkill()
   }
 
-  get skillFormArray() {
+  get skills() {
+    return this.skillsFormArray.controls as FormGroup[];
+  }
+
+  get skillsFormArray() {
     return this.personForm.get('skills') as FormArray;
   }
 
@@ -49,10 +55,10 @@ export class PersonFormComponent {
     const skillForm = this.fb.group({
       skill: ['', Validators.required],
     });
-    this.skills.push(skillForm);
+    this.skillsFormArray.push(skillForm);
   }
 
   deleteSkill(index: number) {
-    this.skillFormArray.removeAt(index);
+    this.skillsFormArray.removeAt(index);
   }
 }

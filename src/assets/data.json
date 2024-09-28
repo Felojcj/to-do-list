@@ -1,0 +1,31 @@
+{
+  "tasks": [
+
+    {
+      "id": "d43b",
+      "taskName": "Ejemplo",
+      "limitDate": "2024-09-12T05:00:00.000Z",
+      "active": false,
+      "people": [
+        {
+          "name": "Jon Doe",
+          "age": 21,
+          "skills": [
+            {
+              "skill": "Hola Mundo"
+            }
+          ]
+        },
+        {
+          "name": "Jane Doe",
+          "age": 46,
+          "skills": [
+            {
+              "skill": "Hello Word"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

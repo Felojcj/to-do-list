@@ -1,3 +1,4 @@
+import { CoreService } from './../../services/core.service';
 import { PersonFormComponent } from './person-form/person-form.component';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
@@ -9,6 +10,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-task-form',
@@ -25,11 +29,18 @@ import { CommonModule } from '@angular/common';
     MatDividerModule,
     CommonModule,
     PersonFormComponent,
+    MatIconModule,
+    MatCardModule,
   ],
 })
 export class TaskFormComponent {
   taskForm!: FormGroup;
-  constructor(private fb: FormBuilder) {}
+
+  constructor(
+    private fb: FormBuilder,
+    private coreService: CoreService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.initializeForm();
@@ -39,8 +50,10 @@ export class TaskFormComponent {
     this.taskForm = this.fb.group({
       taskName: ['', [Validators.required, Validators.minLength(5)]],
       limitDate: ['', Validators.required],
+      active: [false],
       people: this.fb.array([]),
     });
+    this.addPerson();
   }
 
   get people() {
@@ -54,14 +67,22 @@ export class TaskFormComponent {
   addPerson() {
     const personForm = this.fb.group({
       name: ['', Validators.required],
-      age: ['', Validators.required],
+      age: ['', [Validators.required, Validators.min(18)]],
       skills: this.fb.array([]),
     });
-    this.people.push(personForm);
+    this.peopleFormArray.push(personForm);
   }
 
   deletePerson(index: number) {
     this.peopleFormArray.removeAt(index);
+  }
+
+  createTask() {
+    console.log(this.taskForm.value);
+    this.coreService.postTasks(this.taskForm.value).subscribe((users) => {
+      console.log('done');
+      this.router.navigate(['/list']);
+    });
   }
 }
 

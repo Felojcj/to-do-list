@@ -1,15 +1,39 @@
 <form [formGroup]="personForm">
-  <mat-form-field class="example-full-width">
-    <mat-label>Nombre Completo</mat-label>
-    <input matInput placeholder="Ej. Jon Doe" formControlName="name" />
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <mat-label>Edad</mat-label>
-    <input matInput type="number" placeholder="Ej. 21" formControlName="name" />
-  </mat-form-field>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <mat-form-field class="w-100">
+        <mat-label>Nombre Completo</mat-label>
+        <input matInput placeholder="Ej. Jon Doe" formControlName="name" />
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-md-6">
+      <mat-form-field class="w-100">
+        <mat-label>Edad</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Ej. 21"
+          formControlName="age"
+        />
+      </mat-form-field>
+    </div>
+  </div>
   <div *ngFor="let skill of skills; let i = index">
-    <button mat-raised-button (click)="deleteSkill(i)">Eliminar habilidad {{i}}</button>
-    <app-skill-form [skillForm]="skill"></app-skill-form>
+    <mat-card class="my-3">
+      <mat-card-header class="d-block">
+        <mat-card-title>
+          <div class="d-flex justify-content-between mb-2 align-items-center">
+            <div>Habilidad {{ i + 1 }}</div>
+            <button mat-fab color="primary" (click)="deleteSkill(i)" *ngIf="i > 0">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <app-skill-form [skillForm]="skill"></app-skill-form>
+      </mat-card-content>
+    </mat-card>
   </div>
   <button mat-raised-button (click)="addSkill()">Añadir Habilidad</button>
 </form>
