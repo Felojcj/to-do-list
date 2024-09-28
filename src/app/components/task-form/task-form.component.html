@@ -41,7 +41,12 @@
                   class="d-flex justify-content-between mb-2 align-items-center"
                 >
                   <div>Persona {{ i + 1 }}</div>
-                  <button mat-fab color="primary" (click)="deletePerson(i)" *ngIf="i > 0">
+                  <button
+                    mat-fab
+                    color="primary"
+                    (click)="deletePerson(i)"
+                    *ngIf="i > 0"
+                  >
                     <mat-icon>delete</mat-icon>
                   </button>
                 </div>
@@ -54,7 +59,7 @@
         </div>
         <div class="row my-3">
           <div class="col-12 col-md-6 my-2">
-            <button mat-raised-button (click)="addPerson()">
+            <button mat-raised-button color="accent" (click)="addPerson()">
               Añadir Persona
             </button>
           </div>
@@ -72,4 +77,10 @@
       </form>
     </mat-card-content>
   </mat-card>
+  <div *ngIf="taskForm.get('people')?.errors?.['duplicateNames']" class="error">
+    <h2 class="text-danger">Los nombres de las personas no deben ser iguales</h2>
+  </div>
+  <div class="mt-3">
+    <button mat-raised-button (click)="goToTaskList()">Ir a Lista de Tareas</button>
+  </div>
 </div>

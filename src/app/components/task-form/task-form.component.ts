@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { uniqueNamesValidator } from 'src/app/validators/custom-validators';
 
 @Component({
   selector: 'app-task-form',
@@ -51,7 +52,7 @@ export class TaskFormComponent {
       taskName: ['', [Validators.required, Validators.minLength(5)]],
       limitDate: ['', Validators.required],
       active: [false],
-      people: this.fb.array([]),
+      people: this.fb.array([], uniqueNamesValidator),
     });
     this.addPerson();
   }
@@ -83,6 +84,10 @@ export class TaskFormComponent {
       console.log('done');
       this.router.navigate(['/list']);
     });
+  }
+
+  goToTaskList() {
+    this.router.navigate(['/list'])
   }
 }
 

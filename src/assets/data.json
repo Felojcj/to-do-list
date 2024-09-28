@@ -1,6 +1,5 @@
 {
   "tasks": [
-
     {
       "id": "d43b",
       "taskName": "Ejemplo",
@@ -22,6 +21,35 @@
           "skills": [
             {
               "skill": "Hello Word"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3161",
+      "taskName": "Cortar Cesped",
+      "limitDate": "2024-09-28T05:00:00.000Z",
+      "active": true,
+      "people": [
+        {
+          "name": "Juan",
+          "age": 20,
+          "skills": [
+            {
+              "skill": "Jardineria"
+            }
+          ]
+        },
+        {
+          "name": "Maria",
+          "age": 19,
+          "skills": [
+            {
+              "skill": "Florista"
+            },
+            {
+              "skill": "Agropecuaria"
             }
           ]
         }
